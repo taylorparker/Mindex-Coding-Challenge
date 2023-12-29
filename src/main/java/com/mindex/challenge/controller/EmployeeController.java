@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class EmployeeController {
     private static final Logger LOG = LoggerFactory.getLogger(EmployeeController.class);
@@ -45,17 +47,17 @@ public class EmployeeController {
         return employeeService.getReportingStructure(id);
     }
 
+    @PostMapping("/employee/compensation/{id}")
+    public Compensation createCompensation(@RequestBody Compensation compensation) {
+        LOG.debug("Received create compensation request for id [{}]", compensation.getEmployeeID());
+
+        return employeeService.createEmployeeCompensation(compensation);
+    }
+
     @GetMapping("/employee/compensation/{id}")
-    public Compensation getEmployeeSalary(@PathVariable String id) {
+    public List<Compensation> getEmployeeCompensation(@PathVariable String id) {
         LOG.debug("Received compensation request for id [{}]", id);
 
         return employeeService.getEmployeeCompensation(id);
-    }
-
-    @PostMapping("/employee/compensation/{id}")
-    public Compensation createEmployeeSalary(@RequestBody Compensation compensation) {
-        LOG.debug("Received create compensation request for compensation [{}]", compensation);
-
-        return employeeService.createEmployeeCompensation(compensation);
     }
 }

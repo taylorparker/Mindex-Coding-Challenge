@@ -1,5 +1,6 @@
 package com.mindex.challenge.service.impl;
 
+import com.mindex.challenge.dao.CompensationRepository;
 import com.mindex.challenge.dao.EmployeeRepository;
 import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.data.Employee;
@@ -8,7 +9,9 @@ import com.mindex.challenge.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private CompensationRepository compensationRepository;
 
     @Override
     public Employee create(Employee employee) {
@@ -39,8 +44,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = employeeRepository.findByEmployeeId(id);
 
         if (employee == null) {
-            throw new RuntimeException("Invalid employeeId: " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No employee found for employeeId: " + id);
         }
+
+        calculateDirectReports(employee);
 
         return employee;
     }
@@ -59,8 +66,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = read(id);
 
         if (employee == null) {
-            throw new RuntimeException("Invalid employeeId: " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No employee found for employeeId: " + id);
         }
+
         ReportingStructure reportingStructure = new ReportingStructure();
         reportingStructure.setEmployee(employee);
         reportingStructure.setNumberOfReports(calculateDirectReports(employee));
@@ -70,41 +78,40 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public Integer calculateDirectReports(Employee employee) {
         int reports = 0;
-        List<Employee> tempList = new ArrayList<>();
+        List<Employee> listOfDirectReports = new ArrayList<>();
 
         if (employee.getDirectReports() != null) {
             reports += employee.getDirectReports().size();
 
             for (Employee directReport : employee.getDirectReports()) {
                 directReport = read(directReport.getEmployeeId());
-                tempList.add(directReport);
                 reports += calculateDirectReports(directReport);
+                listOfDirectReports.add(directReport);
             }
         }
 
-        employee.setDirectReports(tempList);
+        employee.setDirectReports(listOfDirectReports);
 
         return reports;
     }
 
-
-
-
-
-
-
-
-
-
-
-    @Override
-    public Compensation getEmployeeCompensation(String id) {
-        return null;
-    }
-
     @Override
     public Compensation createEmployeeCompensation(Compensation compensation) {
+        LOG.debug("Creating Compensation [{}]", compensation.toString());
 
-        return null;
+        return compensationRepository.save(compensation);
     }
+
+    @Override
+    public List<Compensation> getEmployeeCompensation(String id) {
+
+        List<Compensation> compensation = compensationRepository.findByEmployeeId(id);
+
+        if (compensation.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No compensation found for employee id: " + id);
+        }
+        return compensation;
+    }
+
+
 }
