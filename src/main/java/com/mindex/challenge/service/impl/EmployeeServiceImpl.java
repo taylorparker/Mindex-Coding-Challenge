@@ -44,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = employeeRepository.findByEmployeeId(id);
 
         if (employee == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No employee found for employeeId: " + id);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No employee found for employeeId: " + id);
         }
 
         calculateDirectReports(employee);
@@ -66,7 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = read(id);
 
         if (employee == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No employee found for employeeId: " + id);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No employee found for employeeId: " + id);
         }
 
         ReportingStructure reportingStructure = new ReportingStructure();
@@ -108,7 +108,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Compensation> compensation = compensationRepository.findByEmployeeId(id);
 
         if (compensation.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No compensation found for employee id: " + id);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No compensation found for employee id: " + id);
         }
         return compensation;
     }
