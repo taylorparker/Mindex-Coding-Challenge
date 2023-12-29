@@ -27,7 +27,7 @@ public class ChallengeApplicationTests {
 	private CompensationRepository compensationRepository;
 	@Autowired
 	private EmployeeService employeeService;
-	
+
 	@Test
 	public void employeeTest() {
 		Employee employee = employeeRepository.findByEmployeeId("b7839309-3348-463b-a7e3-5de1c168beb3");

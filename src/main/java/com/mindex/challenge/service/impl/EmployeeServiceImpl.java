@@ -110,6 +110,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (compensation == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No compensation found for employee id: " + id);
         }
+
         return compensation;
     }
 
