@@ -1,5 +1,25 @@
-# Coding Challenge
-## What's Provided
+# How I Approached This Challenge:
+To start, I really enjoyed this challenge and am excited about this opportunity.
+
+In order to complete Task #1, I knew recursion would be needed. 
+I created the method `calculateDirectReports()` in order to traverse the binary tree.
+I also noticed the list of `directReports` expects `Employee` objects, but the database only contains the `employeeId`.
+While already iterating over the binary tree, the `calculateDirectReports()` method also creates an `Employee` object for each direct report, and stores them in a list.
+The employee's `directReports` list is updated to contain all the information on each direct report.
+I decided to utilize the existing `EmployeeService` to contain the new direct report methods.
+
+For Task #2, I created a `Compensation` bean, created the 2 new REST endpoints, and created a new Mongo repository to store all the Compensations.
+The `employeeId` field was used as the primary key, and a compensation JSON is returned.
+
+I have also changed the way some errors were thrown. 
+Rather than throw a runtime error on an `employeeId` not found, I have updated the response to indicate a Bad Request.
+The error message still informs the user about why it was a bad request, and it is much better than throwing a runtime error.
+
+I also used Postman for my development testing. I have uploaded the JSON of my postman project as well.
+The tests can be imported through the `Postman API Tests` file.
+
+
+# Below was the Coding Challenge Provided:
 A simple [Spring Boot](https://projects.spring.io/spring-boot/) web application has been created and bootstrapped 
 with data. The application contains information about all employees at a company. On application start-up, an in-memory 
 Mongo database is bootstrapped with a serialized snapshot of the database. While the application runs, the data may be
@@ -81,6 +101,3 @@ not be persisted.
 Create a new type, Compensation. A Compensation has the following fields: employee, salary, and effectiveDate. Create 
 two new Compensation REST endpoints. One to create and one to read by employeeId. These should persist and query the 
 Compensation from the persistence layer.
-
-## Delivery
-Please upload your results to a publicly accessible Git repo. Free ones are provided by Github and Bitbucket.
