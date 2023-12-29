@@ -53,7 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Integer getReportingStructure(String id) {
+    public ReportingStructure getReportingStructure(String id) {
         LOG.debug("Getting reporting structure for id [{}]", id);
 
         Employee employee = read(id);
@@ -61,26 +61,28 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (employee == null) {
             throw new RuntimeException("Invalid employeeId: " + id);
         }
+        ReportingStructure reportingStructure = new ReportingStructure();
+        reportingStructure.setEmployee(employee);
+        reportingStructure.setNumberOfReports(calculateDirectReports(employee));
 
-        return calculateDirectReports(employee);
+        return reportingStructure;
     }
 
-    public Integer calculateDirectReports(Employee tempEmployee) {
+    public Integer calculateDirectReports(Employee employee) {
         int reports = 0;
         List<Employee> tempList = new ArrayList<>();
 
-        if (tempEmployee.getDirectReports() != null) {
-            reports += tempEmployee.getDirectReports().size();
+        if (employee.getDirectReports() != null) {
+            reports += employee.getDirectReports().size();
 
-            for (Employee val : tempEmployee.getDirectReports()) {
-                Employee idk = read(val.getEmployeeId());
-                System.out.println(idk.getFirstName());
-                tempList.add(idk);
-                reports += calculateDirectReports(idk);
+            for (Employee directReport : employee.getDirectReports()) {
+                directReport = read(directReport.getEmployeeId());
+                tempList.add(directReport);
+                reports += calculateDirectReports(directReport);
             }
         }
 
-        tempEmployee.setDirectReports(tempList);
+        employee.setDirectReports(tempList);
 
         return reports;
     }
