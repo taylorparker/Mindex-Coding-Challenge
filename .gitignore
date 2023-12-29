@@ -1,0 +1,17 @@
+
+build/classes/java/main/com/mindex/challenge/service/impl/EmployeeServiceImpl.class
+build/classes/java/main/com/mindex/challenge/service/EmployeeService.class
+build/classes/java/main/com/mindex/challenge/data/ReportingStructure.class
+build/classes/java/main/com/mindex/challenge/controller/EmployeeController.class
+.idea/workspace.xml
+.gradle/checksums/checksums.lock
+.gradle/buildOutputCleanup/outputFiles.bin
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/6.3/javaCompile/taskHistory.bin
+.gradle/6.3/javaCompile/javaCompile.lock
+.gradle/6.3/javaCompile/classAnalysis.bin
+.gradle/6.3/fileHashes/fileHashes.lock
+.gradle/6.3/fileHashes/fileHashes.bin
+.gradle/6.3/fileContent/fileContent.lock
+.gradle/6.3/executionHistory/executionHistory.lock
+.gradle/6.3/executionHistory/executionHistory.bin
