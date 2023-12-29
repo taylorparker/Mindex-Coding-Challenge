@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "624042f1-94bc-431d-9e47-a0fd703432f9",
+		"name": "Coding Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31976174"
+	},
+	"item": [
+		{
+			"name": "Employee",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/employee/a53432ab-2083-466f-b204-429b8e510cf4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"a53432ab-2083-466f-b204-429b8e510cf4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reporting Structure",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/employee/reporting/a53432ab-2083-466f-b204-429b8e510cf4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"reporting",
+						"a53432ab-2083-466f-b204-429b8e510cf4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Employee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Taylor\",\r\n    \"lastName\": \"Parker\",\r\n    \"position\": \"Software Developer\",\r\n    \"department\": \"Engineering\",\r\n    \"directReports\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/employee/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Employee",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Taylor\",\r\n    \"lastName\": \"Parker\",\r\n    \"position\": \"Software Developer\",\r\n    \"department\": \"Engineering\",\r\n    \"directReports\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/employee/eb0f778e-885e-459f-a30a-772a2aaa4429",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"eb0f778e-885e-459f-a30a-772a2aaa4429"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Compensation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"employeeID\": \"a53432ab-2083-466f-b204-429b8e510cf4\",\r\n    \"salary\": 100000.00,\r\n    \"effectiveDate\": \"12-29-2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/employee/compensation/c0c2293d-16bd-4603-8e08-638a9d18b22c",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"compensation",
+						"c0c2293d-16bd-4603-8e08-638a9d18b22c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Compensation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/employee/compensation/a53432ab-2083-466f-b204-429b8e510cf4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"compensation",
+						"a53432ab-2083-466f-b204-429b8e510cf4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
