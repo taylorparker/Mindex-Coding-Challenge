@@ -55,7 +55,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee/compensation/{id}")
-    public List<Compensation> getEmployeeCompensation(@PathVariable String id) {
+    public Compensation getEmployeeCompensation(@PathVariable String id) {
         LOG.debug("Received compensation request for id [{}]", id);
 
         return employeeService.getEmployeeCompensation(id);

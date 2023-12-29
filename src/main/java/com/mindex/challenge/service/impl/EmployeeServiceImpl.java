@@ -103,11 +103,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Compensation> getEmployeeCompensation(String id) {
+    public Compensation getEmployeeCompensation(String id) {
 
-        List<Compensation> compensation = compensationRepository.findByEmployeeId(id);
+        Compensation compensation = compensationRepository.findByEmployeeId(id);
 
-        if (compensation.isEmpty()) {
+        if (compensation == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No compensation found for employee id: " + id);
         }
         return compensation;
